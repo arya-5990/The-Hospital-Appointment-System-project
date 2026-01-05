@@ -11,14 +11,14 @@ app.use(cors());
 app.use(express.json());
 
 // Routes Placeholder
-// app.use('/api/auth', require('./routes/authRoutes'));
-// app.use('/api/users', require('./routes/userRoutes'));
-// app.use('/api/appointments', require('./routes/appointmentRoutes'));
+app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/appointments', require('./routes/appointmentRoutes'));
 
 app.get('/', (req, res) => {
-  res.send('Hospital Appointment System API is running...');
+    res.send('Hospital Appointment System API is running...');
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
