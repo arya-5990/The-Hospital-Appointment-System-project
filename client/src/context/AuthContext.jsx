@@ -47,12 +47,18 @@ export const AuthProvider = ({ children }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
             });
-            if (!res.ok) throw new Error('Registration failed');
+
             const data = await res.json();
+
+            if (!res.ok) {
+                // Throw the specific error from backend (e.g. "Username taken" or "Mongo Error")
+                throw new Error(data.message || data.error || 'Registration failed');
+            }
+
             // optionally login after register
             return data;
         } catch (e) {
-            console.error(e);
+            console.error("Registration Error Details:", e);
             throw e;
         }
     };

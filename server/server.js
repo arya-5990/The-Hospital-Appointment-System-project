@@ -9,13 +9,19 @@ const PORT = process.env.PORT || 5000;
 
 const mongoose = require('mongoose');
 
+// Debug Access
+console.log('Attempting to connect to DB...');
+if (!process.env.MONGO_URI) {
+    console.error('FATAL ERROR: MONGO_URI is not defined in .env');
+    process.exit(1);
+}
+
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.log('MongoDB Connection Error:', err));
+mongoose.connect(process.env.MONGO_URI, {})
+    .then(() => console.log('✅ MongoDB Connected Successfully'))
+    .catch(err => {
+        console.error('❌ MongoDB Connection Error Details:', err);
+    });
 
 app.use(cors());
 app.use(express.json());

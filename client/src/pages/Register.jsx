@@ -23,9 +23,10 @@ const Register = () => {
         setError('');
         try {
             await register(formData);
+            alert('Registration successful! Please login.');
             navigate('/login');
         } catch (err) {
-            setError('Registration failed. Username might be taken.');
+            setError(err.message || 'Registration failed');
         }
     };
 
