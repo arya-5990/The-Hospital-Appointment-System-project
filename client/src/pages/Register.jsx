@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { UserPlus, User, Lock, Briefcase } from 'lucide-react';
+import { UserPlus, User, Lock, Briefcase, Eye, EyeOff } from 'lucide-react';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +10,7 @@ const Register = () => {
         role: 'patient',
         specialization: ''
     });
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const { register } = useAuth();
     const navigate = useNavigate();
@@ -62,14 +63,21 @@ const Register = () => {
                         <div className="flex items-center" style={{ position: 'relative' }}>
                             <Lock size={18} style={{ position: 'absolute', left: '1rem', color: 'var(--text-muted)' }} />
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 className="input"
-                                style={{ paddingLeft: '3rem' }}
+                                style={{ paddingLeft: '3rem', paddingRight: '2.5rem' }}
                                 value={formData.password}
                                 onChange={handleChange}
                                 required
                             />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{ position: 'absolute', right: '1rem', background: 'none', color: 'var(--text-muted)' }}
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
                         </div>
                     </div>
 
@@ -78,17 +86,29 @@ const Register = () => {
                         <div className="flex gap-4">
                             <button
                                 type="button"
-                                className={`flex-1 input ${formData.role === 'patient' ? 'btn-primary' : ''}`}
+                                className={`flex-1 input`}
                                 onClick={() => setFormData({ ...formData, role: 'patient' })}
-                                style={{ textAlign: 'center', borderColor: formData.role === 'patient' ? 'var(--primary)' : 'var(--border)' }}
+                                style={{
+                                    textAlign: 'center',
+                                    border: formData.role === 'patient' ? '2px solid var(--primary)' : '1px solid var(--border)',
+                                    background: formData.role === 'patient' ? 'var(--primary)' : 'white',
+                                    color: formData.role === 'patient' ? 'white' : 'var(--text-main)',
+                                    fontWeight: '600'
+                                }}
                             >
                                 Patient
                             </button>
                             <button
                                 type="button"
-                                className={`flex-1 input ${formData.role === 'doctor' ? 'btn-primary' : ''}`}
+                                className={`flex-1 input`}
                                 onClick={() => setFormData({ ...formData, role: 'doctor' })}
-                                style={{ textAlign: 'center', borderColor: formData.role === 'doctor' ? 'var(--primary)' : 'var(--border)' }}
+                                style={{
+                                    textAlign: 'center',
+                                    border: formData.role === 'doctor' ? '2px solid var(--primary)' : '1px solid var(--border)',
+                                    background: formData.role === 'doctor' ? 'var(--primary)' : 'white',
+                                    color: formData.role === 'doctor' ? 'white' : 'var(--text-main)',
+                                    fontWeight: '600'
+                                }}
                             >
                                 Doctor
                             </button>

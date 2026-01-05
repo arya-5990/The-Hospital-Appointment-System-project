@@ -31,6 +31,10 @@ const Navbar = () => {
                                 <Calendar size={18} />
                                 Appointments
                             </Link>
+                            <Link to="/users" className="flex items-center gap-2" style={{ fontWeight: '500' }}>
+                                <Activity size={18} />
+                                {user.role === 'patient' ? 'Find Doctors' : 'Patients'}
+                            </Link>
                             <div className="flex items-center gap-4">
                                 <span style={{ color: 'var(--text-muted)' }}>Hello, {user.username}</span>
                                 <button onClick={handleLogout} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>

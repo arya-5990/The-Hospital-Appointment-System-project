@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Stethoscope, CalendarCheck, ShieldCheck } from 'lucide-react';
 
+import docImage from '../assets/smiling-medical-doctor-woman-stethoscope-isolated-over-white-background-35552912.png';
+
 const Home = () => {
     return (
         <div className="fade-in">
@@ -30,15 +32,29 @@ const Home = () => {
                     </div>
 
                     {/* Decorative Visual */}
-                    <div style={{
-                        width: '500px',
-                        height: '500px',
-                        background: 'linear-gradient(45deg, var(--primary-light), var(--accent))',
-                        borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
-                        position: 'relative',
-                        opacity: 0.1,
-                        animation: 'morph 8s ease-in-out infinite'
-                    }}>
+                    <div style={{ position: 'relative', width: '500px', height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{
+                            width: '100%',
+                            height: '100%',
+                            background: 'linear-gradient(45deg, var(--primary-light), var(--accent))',
+                            borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                            position: 'absolute',
+                            opacity: 0.1,
+                            zIndex: 0,
+                            animation: 'morph 8s ease-in-out infinite'
+                        }}></div>
+                        <img
+                            src={docImage}
+                            alt="Doctor"
+                            style={{
+                                position: 'relative',
+                                zIndex: 1,
+                                maxHeight: '110%',
+                                objectFit: 'contain',
+                                maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+                                WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)'
+                            }}
+                        />
                         <style>
                             {`
                 @keyframes morph {
